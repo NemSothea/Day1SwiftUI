@@ -1,15 +1,31 @@
-//
-//  ContentView.swift
-//  Day1
-//
+
 //  Created by SotheaMac on 20/1/2564 BE.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var selection : Tap = .featured
+    
+    enum Tap {
+        case featured
+        case list
+    }
+    
     var body: some View {
-        LandmarkList()
+        TabView(selection: $selection) {
+            CategoryHome()
+                .tabItem {
+                    Label("Featured", systemImage: "star")
+                }
+                .tag(Tap.featured)
+            LandmarkList()
+                .tabItem {
+                    Label("List", systemImage: "list.bullet")
+                }
+                .tag(Tap.list)
+        }
     }
 }
 
